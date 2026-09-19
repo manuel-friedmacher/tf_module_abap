@@ -1,0 +1,11 @@
+formatter: pretty
+output:
+  file: README.md
+  mode: inject
+sections:
+  show:
+    - inputs
+    - outputs
+    - resources
+    - requirements
+    - providers

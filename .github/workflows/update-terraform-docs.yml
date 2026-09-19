@@ -1,0 +1,19 @@
+name: Update Terraform Docs
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.tf"
+      - ".terraform-docs.yml"
+jobs:
+  terraform-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate terraform-docs
+        uses: terraform-docs/gh-actions@v1
+        with:
+          working-dir: ./
+          config-file: .terraform-docs.yml
+          git-push: true
+          git-commit-message: "docs: auto-update terraform-docs"
