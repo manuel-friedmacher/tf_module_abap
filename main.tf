@@ -4,24 +4,24 @@ locals {
 }
 
 # Assignment of entitlements for an SAP BTP ABAP Environment
-resource "btp_subaccount_entitlement" "abap__service_instance_plan" {
+resource "btp_subaccount_entitlement" "abap_service_instance" {
   subaccount_id = var.subaccount_id
   service_name  = "abap"
   plan_name     = "standard"
 }
-resource "btp_subaccount_entitlement" "abap__abap_compute_unit" {
+resource "btp_subaccount_entitlement" "abap_compute_unit" {
   subaccount_id = var.subaccount_id
   service_name  = "abap"
   plan_name     = "abap_compute_unit"
   amount        = 1
 }
-resource "btp_subaccount_entitlement" "abap__hana_compute_unit" {
+resource "btp_subaccount_entitlement" "hana_compute_unit" {
   subaccount_id = var.subaccount_id
   service_name  = "abap"
   plan_name     = "hana_compute_unit"
   amount        = 2
 }
-resource "btp_subaccount_entitlement" "abap__web-router" {
+resource "btp_subaccount_entitlement" "web_router" {
   subaccount_id = var.subaccount_id
   service_name  = "abapcp-web-router"
   plan_name     = "default"
@@ -43,14 +43,6 @@ resource "cloudfoundry_space_role" "space_developer" {
   origin   = local.idp_platform_origin
   type     = "space_developer"
   space    = cloudfoundry_space.abap_space.id
-}
-
-# Create a service instance for the ABAP web access
-resource "btp_subaccount_subscription" "abap_web_access" {
-  subaccount_id = var.subaccount_id
-  app_name      = "abapcp-web-router"
-  plan_name     = "default"
-  depends_on    = [btp_subaccount_entitlement.abap__web-router]
 }
 
 # Create the BTP ABAP environment
@@ -83,4 +75,12 @@ resource "cloudfoundry_service_credential_binding" "abap_service_key" {
   type             = "key"
   name             = join("_", ["sk", "abap", trimspace(upper(var.abap_sid))])
   service_instance = cloudfoundry_service_instance.abap_env.id
+}
+
+# Create a service instance for the ABAP web access
+resource "btp_subaccount_subscription" "abap_web_access" {
+  subaccount_id = var.subaccount_id
+  app_name      = "abapcp-web-router"
+  plan_name     = "default"
+  depends_on    = [btp_subaccount_entitlement.web_router, cloudfoundry_service_instance.abap_env]
 }
