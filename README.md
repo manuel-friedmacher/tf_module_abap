@@ -21,10 +21,10 @@ Template for Terraform modules
 
 | Name | Type |
 |------|------|
-| [btp_subaccount_entitlement.abap__abap_compute_unit](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
-| [btp_subaccount_entitlement.abap__hana_compute_unit](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
-| [btp_subaccount_entitlement.abap__service_instance_plan](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
-| [btp_subaccount_entitlement.abap__web-router](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
+| [btp_subaccount_entitlement.abap_compute_unit](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
+| [btp_subaccount_entitlement.abap_service_instance](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
+| [btp_subaccount_entitlement.hana_compute_unit](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
+| [btp_subaccount_entitlement.web_router](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_entitlement) | resource |
 | [btp_subaccount_subscription.abap_web_access](https://registry.terraform.io/providers/SAP/btp/latest/docs/resources/subaccount_subscription) | resource |
 | [cloudfoundry_service_credential_binding.abap_service_key](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/service_credential_binding) | resource |
 | [cloudfoundry_service_instance.abap_env](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/service_instance) | resource |
