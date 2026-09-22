@@ -45,11 +45,17 @@ resource "cloudfoundry_space_role" "space_developer" {
   space    = cloudfoundry_space.abap_space.id
 }
 
+# Wait 15 seconds for Cloud Foundry to propagate permissions internally
+resource "time_sleep" "wait_for_cf_permissions" {
+  create_duration = "15s"
+  depends_on      = [cloudfoundry_space_role.space_manager, cloudfoundry_space_role.space_developer]
+}
+
 # Create the BTP ABAP environment
 data "cloudfoundry_service_plan" "abap_plan" {
   service_offering_name = "abap"
   name                  = "standard"
-  depends_on            = [cloudfoundry_space_role.space_manager]
+  depends_on            = [time_sleep.wait_for_cf_permissions]
 }
 resource "cloudfoundry_service_instance" "abap_env" {
   name         = "abap-${trimspace(upper(var.abap_sid))}"
@@ -70,7 +76,7 @@ resource "cloudfoundry_service_instance" "abap_env" {
   }
 }
 
-# Create a service key for the ABAP system
+# Create a service key for the ABAP environment
 resource "cloudfoundry_service_credential_binding" "abap_service_key" {
   type             = "key"
   name             = join("_", ["sk", "abap", trimspace(upper(var.abap_sid))])
@@ -82,5 +88,5 @@ resource "btp_subaccount_subscription" "abap_web_access" {
   subaccount_id = var.subaccount_id
   app_name      = "abapcp-web-router"
   plan_name     = "default"
-  depends_on    = [btp_subaccount_entitlement.web_router, cloudfoundry_service_instance.abap_env]
+  depends_on    = [cloudfoundry_service_instance.abap_env]
 }
