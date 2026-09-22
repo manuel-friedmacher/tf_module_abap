@@ -16,6 +16,7 @@ Template for Terraform modules
 |------|---------|
 | <a name="provider_btp"></a> [btp](#provider\_btp) | >= 1.22 |
 | <a name="provider_cloudfoundry"></a> [cloudfoundry](#provider\_cloudfoundry) | >= 1.15 |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
 
 ## Resources
 
@@ -31,6 +32,7 @@ Template for Terraform modules
 | [cloudfoundry_space.abap_space](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/space) | resource |
 | [cloudfoundry_space_role.space_developer](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/space_role) | resource |
 | [cloudfoundry_space_role.space_manager](https://registry.terraform.io/providers/cloudfoundry/cloudfoundry/latest/docs/resources/space_role) | resource |
+| [time_sleep.wait_for_cf_permissions](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 
 ## Inputs
 
